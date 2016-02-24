@@ -12,6 +12,7 @@
 		444583B71C7E2A5600FDAC3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444583B51C7E2A5600FDAC3A /* Main.storyboard */; };
 		444583B91C7E2A5600FDAC3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444583B81C7E2A5600FDAC3A /* Assets.xcassets */; };
 		444583BC1C7E2A5600FDAC3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444583BA1C7E2A5600FDAC3A /* LaunchScreen.storyboard */; };
+		444583C91C7E2DB300FDAC3A /* LLSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444583C81C7E2DB300FDAC3A /* LLSwipeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		444583B81C7E2A5600FDAC3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		444583BB1C7E2A5600FDAC3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		444583BD1C7E2A5600FDAC3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		444583C81C7E2DB300FDAC3A /* LLSwipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLSwipeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +40,8 @@
 		444583A51C7E2A5600FDAC3A = {
 			isa = PBXGroup;
 			children = (
-				444583B01C7E2A5600FDAC3A /* LLSwipeCell */,
+				444583C71C7E2DA200FDAC3A /* LLSwipeCell */,
+				444583B01C7E2A5600FDAC3A /* Demo */,
 				444583AF1C7E2A5600FDAC3A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,7 +54,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		444583B01C7E2A5600FDAC3A /* LLSwipeCell */ = {
+		444583B01C7E2A5600FDAC3A /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				444583B11C7E2A5600FDAC3A /* AppDelegate.swift */,
@@ -60,6 +63,14 @@
 				444583B81C7E2A5600FDAC3A /* Assets.xcassets */,
 				444583BA1C7E2A5600FDAC3A /* LaunchScreen.storyboard */,
 				444583BD1C7E2A5600FDAC3A /* Info.plist */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		444583C71C7E2DA200FDAC3A /* LLSwipeCell */ = {
+			isa = PBXGroup;
+			children = (
+				444583C81C7E2DB300FDAC3A /* LLSwipeCell.swift */,
 			);
 			path = LLSwipeCell;
 			sourceTree = "<group>";
@@ -136,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				444583B41C7E2A5600FDAC3A /* ViewController.swift in Sources */,
+				444583C91C7E2DB300FDAC3A /* LLSwipeCell.swift in Sources */,
 				444583B21C7E2A5600FDAC3A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,7 +261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = LLSwipeCell/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = VoidCore.LLSwipeCell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -260,7 +272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = LLSwipeCell/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = VoidCore.LLSwipeCell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
