@@ -166,6 +166,13 @@ class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     private weak var currentTableView: UITableView?
     @IBOutlet weak var slideContentView: UIView!
     
+    var leftXOffset: CGFloat {
+        return leftButtonsContainerView.bounds.size.width
+    }
+    
+    var rightXOffset: CGFloat {
+        return rightButtonsContainerView.bounds.size.width
+    }
     
     var startOffset: CGPoint {
         let leftOffset = leftButtonsContainerView.bounds.size.width
@@ -354,50 +361,51 @@ class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     internal func targetOffset(currentOffset: CGPoint) -> CGPoint {
-        let leftOffset = leftButtonsContainerView.bounds.size.width
-        let rightOffset = rightButtonsContainerView.bounds.size.width
-        
-        if (currentOffset.x > leftOffset + CGFloat(rightTriggerOffset)) {
-            return CGPoint(x: leftOffset + rightOffset, y: 0)
+        if (currentOffset.x > leftXOffset + CGFloat(rightTriggerOffset)) {
+            return CGPoint(x: leftXOffset + rightXOffset, y: 0)
         } else if (currentOffset.x < CGFloat(leftTriggerOffset)) {
             return CGPointZero
         }
         
-        return CGPoint(x: leftOffset, y: 0)
+        return CGPoint(x: leftXOffset, y: 0)
     }
     
     internal func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let offset = targetOffset(scrollView.contentOffset)
         
+        let offset = targetOffset(scrollView.contentOffset)
         targetContentOffset.memory = offset
+        
+        if abs(velocity.x) > 0.1 {
+            dispatch_async(dispatch_get_main_queue()) {
+                scrollView.setContentOffset(offset, animated: true)
+            }
+        }
     }
     
     private func updateGroupViewProgres() {
         let rightScrollOffset = cellScrollView.contentOffset.x - startOffset.x
-        var rightProgress = rightScrollOffset > 0.0 ? rightScrollOffset / rightButtonsContainerView.bounds.size.width : 0.0
+        var rightProgress = rightScrollOffset > 0.0 ? rightScrollOffset / rightXOffset : 0.0
         
         rightProgress = min(1.0, max(0, rightProgress))
         rightButtonsContainerView.progress = rightProgress
         
         let leftScrollOffset = cellScrollView.contentOffset.x
-        var leftProgress = leftScrollOffset > 0.0 ? leftScrollOffset / leftButtonsContainerView.bounds.size.width : 0.0
+        var leftProgress = leftScrollOffset > 0.0 ? leftScrollOffset / leftXOffset : 0.0
         
         leftProgress = min(1.0, max(0, 1-leftProgress))
-        debugPrint(leftProgress)
         leftButtonsContainerView.progress = leftProgress
     }
     
     internal func scrollViewDidScroll(scrollView: UIScrollView) {
         updateGroupViewProgres()
         
-        if (cellScrollView.dragging
-            && !canOpenRightButtons
-            && scrollView.contentOffset.x > startOffset.x
+        if (cellScrollView.dragging && !canOpenRightButtons
+            && scrollView.contentOffset.x > leftXOffset
             && !showsRightButtons) {
             hideSwipeOptions(false)
         }
         
-        if (cellScrollView.dragging && !canOpenLeftButtons && scrollView.contentOffset.x < startOffset.x && !showsLeftButtons) {
+        if (cellScrollView.dragging && !canOpenLeftButtons && scrollView.contentOffset.x < leftXOffset && !showsLeftButtons) {
             hideSwipeOptions(false)
         }
         

@@ -29,16 +29,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QLF-TL-MtP">
-                                                    <rect key="frame" x="0.0" y="-1" width="320" height="79.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="253" height="79.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hello stranger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMm-62-Zw0">
-                                                            <rect key="frame" x="16" y="29" width="132" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello stranger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMm-62-Zw0">
+                                                            <rect key="frame" x="16" y="29.5" width="108" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="JMm-62-Zw0" firstAttribute="leading" secondItem="QLF-TL-MtP" secondAttribute="leading" constant="16" id="UfX-Zh-WKs"/>
                                                         <constraint firstItem="JMm-62-Zw0" firstAttribute="centerY" secondItem="QLF-TL-MtP" secondAttribute="centerY" id="pMs-Dx-f9j"/>
