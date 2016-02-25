@@ -159,7 +159,7 @@ internal class SlideButtonsGroupView: UIView {
 }
 
 
-class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
+public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     private let cellScrollView = SlideTableCellScrollView()
     private weak var currentTableView: UITableView?
     @IBOutlet weak var slideContentView: UIView!
@@ -321,7 +321,7 @@ class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
+    override public func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         
         currentTableView?.panGestureRecognizer.removeTarget(self, action: "didPanTableView:")
@@ -337,18 +337,18 @@ class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         hideSwipeOptions()
     }
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         
         setup()
     }
     
-    override func prepareForReuse() {
+    override public func prepareForReuse() {
         super.prepareForReuse()
         hideSwipeOptions(false)
     }
     
-    override func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    public override func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     
@@ -367,7 +367,7 @@ class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         return CGPoint(x: leftXOffset, y: 0)
     }
     
-    internal func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    public func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
         let offset = targetOffset(scrollView.contentOffset)
         targetContentOffset.memory = offset
@@ -393,7 +393,7 @@ class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         leftButtonsContainerView.progress = leftProgress
     }
     
-    internal func scrollViewDidScroll(scrollView: UIScrollView) {
+    public func scrollViewDidScroll(scrollView: UIScrollView) {
         updateGroupViewProgres()
         
         if (cellScrollView.dragging && !canOpenRightButtons
@@ -409,5 +409,4 @@ class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         showsRightButtons = scrollView.contentOffset.x > startOffset.x
         showsLeftButtons = scrollView.contentOffset.x < startOffset.x
     }
-    
 }
