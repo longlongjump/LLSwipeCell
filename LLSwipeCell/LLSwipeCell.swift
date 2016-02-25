@@ -42,7 +42,13 @@ internal class OverlayView: UIView {
 }
 
 internal class SlideTableCellScrollView: UIScrollView, UIGestureRecognizerDelegate {
-    weak var tableView: UITableView?
+    weak var swipeCell: LLSwipeCell?
+    
+    override var contentSize: CGSize {
+        didSet {
+            swipeCell?.hideSwipeOptions(false)
+        }
+    }
     
     init() {
         super.init(frame: CGRectZero)
@@ -164,6 +170,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     private weak var currentTableView: UITableView?
     @IBOutlet public weak var slideContentView: UIView!
     
+
     var leftXOffset: CGFloat {
         return leftButtonsContainerView.bounds.size.width
     }
@@ -201,6 +208,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     public private(set) var showsRightButtons = false
     
     private func setupScrollView() {
+        cellScrollView.swipeCell = self
         cellScrollView.delegate = self
         
         cellScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -328,7 +336,6 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         
         currentTableView = newSuperview?.parentViewOfClass(UITableView.self)
         currentTableView?.directionalLockEnabled = true
-        cellScrollView.tableView = currentTableView
         
         currentTableView?.panGestureRecognizer.addTarget(self, action: "didPanTableView:")
     }
