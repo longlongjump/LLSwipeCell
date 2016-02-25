@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 extension UIView {
     internal func parentViewOfClass<T>(type: T.Type) -> T? {
         if let view = superview as? T {
@@ -17,7 +16,6 @@ extension UIView {
         return superview?.parentViewOfClass(type)
     }
 }
-
 
 internal class OverlayView: UIView {
     weak var targetView: UIView?
@@ -338,7 +336,6 @@ class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     internal func didPanTableView(rec: UIPanGestureRecognizer) {
         hideSwipeOptions()
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
