@@ -197,8 +197,8 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     public var canOpenLeftButtons = true
     public var canOpenRightButtons = true
     
-    private(set) var showsLeftButtons = false
-    private(set) var showsRightButtons = false
+    public private(set) var showsLeftButtons = false
+    public private(set) var showsRightButtons = false
     
     private func setupScrollView() {
         cellScrollView.delegate = self
@@ -333,7 +333,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         currentTableView?.panGestureRecognizer.addTarget(self, action: "didPanTableView:")
     }
     
-    internal func didPanTableView(rec: UIPanGestureRecognizer) {
+    private func didPanTableView(rec: UIPanGestureRecognizer) {
         hideSwipeOptions()
     }
     
