@@ -162,7 +162,7 @@ internal class SlideButtonsGroupView: UIView {
 public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     private let cellScrollView = SlideTableCellScrollView()
     private weak var currentTableView: UITableView?
-    @IBOutlet weak var slideContentView: UIView!
+    @IBOutlet public weak var slideContentView: UIView!
     
     var leftXOffset: CGFloat {
         return leftButtonsContainerView.bounds.size.width
@@ -177,12 +177,12 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         return CGPoint(x: leftOffset, y: 0)
     }
     
-    var rightButtons: [UIView] = [] {
+    public var rightButtons: [UIView] = [] {
         didSet {
             appendButtons()
         }
     }
-    var leftButtons: [UIView] = [] {
+    public var leftButtons: [UIView] = [] {
         didSet {
             appendButtons()
         }
@@ -194,13 +194,13 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     private let rightButtonsContainerView = SlideButtonsGroupView(side: .Right)
     private let leftButtonsContainerView = SlideButtonsGroupView(side: .Left)
     
-    var canOpenLeftButtons = true
-    var canOpenRightButtons = true
+    public var canOpenLeftButtons = true
+    public var canOpenRightButtons = true
     
-    var showsLeftButtons = false
-    var showsRightButtons = false
+    private(set) var showsLeftButtons = false
+    private(set) var showsRightButtons = false
     
-    func setupScrollView() {
+    private func setupScrollView() {
         cellScrollView.delegate = self
         
         cellScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -213,7 +213,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         contentView.addConstraints(horizCons)
     }
     
-    func setupSlideContentView() {
+    private func setupSlideContentView() {
         slideContentView.removeFromSuperview()
         cellScrollView.addSubview(slideContentView)
         slideContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -230,7 +230,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     
-    func setupOverlayView() {
+    private func setupOverlayView() {
         let overlay = OverlayView()
         overlay.translatesAutoresizingMaskIntoConstraints = false
         overlay.backgroundColor = UIColor.clearColor()
@@ -245,7 +245,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         slideContentView.addConstraints(hotizontalCons)
     }
     
-    func setupLeftGroupView() {
+    private func setupLeftGroupView() {
         cellScrollView.addSubview(leftButtonsContainerView)
         leftButtonsContainerView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -261,7 +261,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         cellScrollView.addConstraints(hotizontalCons)
     }
     
-    func setupRightGroupView() {
+    private func setupRightGroupView() {
         cellScrollView.addSubview(rightButtonsContainerView)
         rightButtonsContainerView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -285,11 +285,11 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         setupRightGroupView()
     }
     
-    func expandLeftButtons(animated: Bool = true) {
+    public func expandLeftButtons(animated: Bool = true) {
         cellScrollView.setContentOffset(CGPointZero, animated: animated)
     }
     
-    func toggleLeftButtons(animated: Bool = true) {
+    public func toggleLeftButtons(animated: Bool = true) {
         if showsLeftButtons {
             hideSwipeOptions(animated)
         } else {
@@ -297,13 +297,13 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         }
     }
     
-    func expandRightButtons(animated: Bool = true) {
+    public func expandRightButtons(animated: Bool = true) {
         let rightOffset = rightButtonsContainerView.bounds.size.width
         let offset = CGPoint(x: startOffset.x + rightOffset, y: 0)
         cellScrollView.setContentOffset(offset, animated: animated)
     }
     
-    func toggleRightButtons(animated: Bool = true) {
+    public func toggleRightButtons(animated: Bool = true) {
         if showsRightButtons {
             hideSwipeOptions(animated)
         } else {
@@ -311,7 +311,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         }
     }
     
-    internal func appendButtons() {
+    private func appendButtons() {
         rightButtonsContainerView.buttons = rightButtons
         leftButtonsContainerView.buttons = leftButtons
         
