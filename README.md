@@ -1,0 +1,6 @@
+# LLSwipeCell
+LLSwipeCell
+
+## Licence
+
+MIT 
