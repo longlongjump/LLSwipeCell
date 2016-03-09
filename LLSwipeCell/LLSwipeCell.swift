@@ -170,6 +170,8 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     private weak var currentTableView: UITableView?
     @IBOutlet public weak var slideContentView: UIView!
     
+    var tapGestureRecognizer = UITapGestureRecognizer()
+    
 
     var leftXOffset: CGFloat {
         return leftButtonsContainerView.bounds.size.width
@@ -213,6 +215,10 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         
         cellScrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(cellScrollView)
+        
+        cellScrollView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.addTarget(self, action: "didTapScrollView:")
         
         let views = ["cellScrollView": cellScrollView]
         let vertCons = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[cellScrollView]-0-|", options: [], metrics: nil, views: views)
@@ -340,7 +346,11 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         currentTableView?.panGestureRecognizer.addTarget(self, action: "didPanTableView:")
     }
     
-    private func didPanTableView(rec: UIPanGestureRecognizer) {
+    @objc private func didPanTableView(rec: UIPanGestureRecognizer) {
+        hideSwipeOptions()
+    }
+    
+    @objc private func didTapScrollView(rec: UITapGestureRecognizer) {
         hideSwipeOptions()
     }
     
@@ -400,20 +410,27 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         leftButtonsContainerView.progress = leftProgress
     }
     
+    private var shouldHideLeftButtons: Bool {
+       return cellScrollView.contentOffset.x < leftXOffset && (!canOpenLeftButtons && cellScrollView.contentOffset.x < leftXOffset && !showsLeftButtons || leftButtons.isEmpty)
+    }
+    
+    private var shouldHideRightButtons: Bool {
+        return cellScrollView.contentOffset.x > leftXOffset && (!canOpenRightButtons
+            && !showsRightButtons || rightButtons.isEmpty)
+    }
+    
     public func scrollViewDidScroll(scrollView: UIScrollView) {
         updateGroupViewProgres()
         
-        if (cellScrollView.dragging && !canOpenRightButtons
-            && scrollView.contentOffset.x > leftXOffset
-            && !showsRightButtons) {
+        if (cellScrollView.dragging && (shouldHideLeftButtons || shouldHideRightButtons)) {
             hideSwipeOptions(false)
         }
         
-        if (cellScrollView.dragging && !canOpenLeftButtons && scrollView.contentOffset.x < leftXOffset && !showsLeftButtons) {
-            hideSwipeOptions(false)
-        }
+        showsRightButtons = (scrollView.contentOffset.x > startOffset.x) && !rightButtons.isEmpty
+        showsLeftButtons = (scrollView.contentOffset.x < startOffset.x) && !leftButtons.isEmpty
         
-        showsRightButtons = scrollView.contentOffset.x > startOffset.x
-        showsLeftButtons = scrollView.contentOffset.x < startOffset.x
+        tapGestureRecognizer.enabled = showsLeftButtons || showsRightButtons
+
+        tapGestureRecognizer.cancelsTouchesInView = tapGestureRecognizer.enabled
     }
 }

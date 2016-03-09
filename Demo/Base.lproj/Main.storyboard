@@ -34,7 +34,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello stranger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMm-62-Zw0">
                                                             <rect key="frame" x="16" y="29.5" width="108" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -55,6 +55,87 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="slideContentView" destination="QLF-TL-MtP" id="Y1r-fN-XWS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OdeSideCell" rowHeight="80" id="kEM-ze-Zvf" customClass="OdeSideCell" customModule="LLSwipeCell" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="108" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kEM-ze-Zvf" id="8Pj-US-eqg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mU8-Ji-zPR">
+                                                    <rect key="frame" x="0.0" y="0.0" width="253" height="79.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello stranger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLZ-bt-5uk">
+                                                            <rect key="frame" x="16" y="29.5" width="108" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="kLZ-bt-5uk" firstAttribute="leading" secondItem="mU8-Ji-zPR" secondAttribute="leading" constant="16" id="XeO-Cr-OWQ"/>
+                                                        <constraint firstItem="kLZ-bt-5uk" firstAttribute="centerY" secondItem="mU8-Ji-zPR" secondAttribute="centerY" id="oNv-u9-KIF"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="mU8-Ji-zPR" firstAttribute="leading" secondItem="8Pj-US-eqg" secondAttribute="leading" id="ID8-ee-TWL"/>
+                                                <constraint firstAttribute="trailing" secondItem="mU8-Ji-zPR" secondAttribute="trailing" id="TEe-wC-YJP"/>
+                                                <constraint firstAttribute="bottom" secondItem="mU8-Ji-zPR" secondAttribute="bottom" id="jri-9v-e7A"/>
+                                                <constraint firstItem="mU8-Ji-zPR" firstAttribute="top" secondItem="8Pj-US-eqg" secondAttribute="top" id="wPs-of-wOv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="slideContentView" destination="mU8-Ji-zPR" id="DMv-LK-NPV"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LockedSwipeCell" rowHeight="80" id="HSW-pA-PgQ" customClass="LockedSwipeCell" customModule="LLSwipeCell" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="188" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HSW-pA-PgQ" id="gON-ED-F0B">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5r-Xp-NIk">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello stranger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Sz-ZE-lfz">
+                                                            <rect key="frame" x="16" y="29.5" width="108" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sc-Kw-wV3">
+                                                            <rect key="frame" x="259" y="25" width="38" height="30"/>
+                                                            <state key="normal" title="Open"/>
+                                                            <connections>
+                                                                <action selector="didTapOpenRightButtons:" destination="HSW-pA-PgQ" eventType="touchUpInside" id="riX-3D-53o"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="8Sc-Kw-wV3" firstAttribute="centerY" secondItem="f5r-Xp-NIk" secondAttribute="centerY" id="2hk-fU-fOr"/>
+                                                        <constraint firstItem="6Sz-ZE-lfz" firstAttribute="centerY" secondItem="f5r-Xp-NIk" secondAttribute="centerY" id="MLd-Qp-PB2"/>
+                                                        <constraint firstAttribute="trailing" secondItem="8Sc-Kw-wV3" secondAttribute="trailing" constant="23" id="Uwc-cx-d9b"/>
+                                                        <constraint firstItem="6Sz-ZE-lfz" firstAttribute="leading" secondItem="f5r-Xp-NIk" secondAttribute="leading" constant="16" id="onG-vL-YJc"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="f5r-Xp-NIk" firstAttribute="top" secondItem="gON-ED-F0B" secondAttribute="top" id="0Z5-Am-cEo"/>
+                                                <constraint firstItem="f5r-Xp-NIk" firstAttribute="leading" secondItem="gON-ED-F0B" secondAttribute="leading" id="GCR-lC-3wd"/>
+                                                <constraint firstAttribute="bottom" secondItem="f5r-Xp-NIk" secondAttribute="bottom" id="NRY-Ug-ulw"/>
+                                                <constraint firstAttribute="trailing" secondItem="f5r-Xp-NIk" secondAttribute="trailing" id="x5j-xW-MQh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="slideContentView" destination="f5r-Xp-NIk" id="eHE-bv-KQ9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
