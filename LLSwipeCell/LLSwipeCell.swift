@@ -168,7 +168,10 @@ internal class SlideButtonsGroupView: UIView {
 public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     private let cellScrollView = SlideTableCellScrollView()
     private weak var currentTableView: UITableView?
-    @IBOutlet public weak var slideContentView: UIView!
+    
+    @IBOutlet public var slideContentView: UIView!
+    
+    private var didSetupUI = false
     
     var tapGestureRecognizer = UITapGestureRecognizer()
     
@@ -241,6 +244,13 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         
         let widthConstraint = NSLayoutConstraint(item: slideContentView, attribute: .Width, relatedBy: .Equal, toItem: cellScrollView, attribute: .Width, multiplier: 1, constant: 0)
         cellScrollView.addConstraint(widthConstraint)
+        
+        
+        let buttonViews = ["slideContentView": slideContentView,
+        "rightButtonsContainerView": rightButtonsContainerView,
+        "leftButtonsContainerView": leftButtonsContainerView]
+        let hotizontalCons = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[leftButtonsContainerView]-0-[slideContentView]-0-[rightButtonsContainerView]-0-|", options: [], metrics: nil, views: buttonViews)
+        cellScrollView.addConstraints(hotizontalCons)
     }
     
     
@@ -256,7 +266,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         slideContentView.addConstraints(vertCons)
 
         let hotizontalCons = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[overlayView]-0-|", options: [], metrics: nil, views: views)
-        slideContentView.addConstraints(hotizontalCons)
+        cellScrollView.addConstraints(hotizontalCons)
     }
     
     private func setupLeftGroupView() {
@@ -270,9 +280,6 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         
         let vertCons = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[leftButtonsContainerView]-0-|", options: [], metrics: nil, views: views)
         cellScrollView.addConstraints(vertCons)
-        
-        let hotizontalCons = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[leftButtonsContainerView]-0-[slideContentView]", options: [], metrics: nil, views: views)
-        cellScrollView.addConstraints(hotizontalCons)
     }
     
     private func setupRightGroupView() {
@@ -286,17 +293,19 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         
         let vertCons = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[rightButtonsContainerView]-0-|", options: [], metrics: nil, views: views)
         cellScrollView.addConstraints(vertCons)
-        
-        let hotizontalCons = NSLayoutConstraint.constraintsWithVisualFormat("H:[slideContentView]-0-[rightButtonsContainerView]-0-|", options: [], metrics: nil, views: views)
-        cellScrollView.addConstraints(hotizontalCons)
     }
     
-    private func setup() {
+    private func setupUIIfNeeded() {
+        precondition(slideContentView != nil, "slideContentView must be set before left or right buttons")
+        if didSetupUI { return }
+        didSetupUI = true
+        
         setupScrollView()
-        setupSlideContentView()
-        setupOverlayView()
         setupLeftGroupView()
         setupRightGroupView()
+        
+        setupSlideContentView()
+        setupOverlayView()
     }
     
     public func expandLeftButtons(animated: Bool = true) {
@@ -326,6 +335,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     private func appendButtons() {
+        setupUIIfNeeded()
         rightButtonsContainerView.buttons = rightButtons
         leftButtonsContainerView.buttons = leftButtons
         
@@ -352,12 +362,6 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     
     @objc private func didTapScrollView(rec: UITapGestureRecognizer) {
         hideSwipeOptions()
-    }
-    
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        
-        setup()
     }
     
     override public func prepareForReuse() {
