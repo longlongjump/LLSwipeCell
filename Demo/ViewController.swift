@@ -85,7 +85,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let id = NSStringFromClass(cells[indexPath.row]).componentsSeparatedByString(".").last!
+        let id = String(cells[indexPath.row])
         let cell = tableView.dequeueReusableCellWithIdentifier(id, forIndexPath: indexPath)
         return cell
     }
