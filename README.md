@@ -64,7 +64,7 @@ func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexP
 
 ### From CocoaPods
 
-Add `pod 'LLSwipeCell', git: "https://github.com/longlongjump/LLSwipeCell.git"` to your Podfile. 
+Add `pod 'LLSwipeCell'` to your Podfile. 
 
 ### Manually
 
