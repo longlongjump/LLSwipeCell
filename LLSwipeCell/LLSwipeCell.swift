@@ -221,7 +221,7 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         
         cellScrollView.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer.cancelsTouchesInView = false
-        tapGestureRecognizer.addTarget(self, action: "didTapScrollView:")
+        tapGestureRecognizer.addTarget(self, action: #selector(LLSwipeCell.didTapScrollView(_:)))
         
         let views = ["cellScrollView": cellScrollView]
         let vertCons = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[cellScrollView]-0-|", options: [], metrics: nil, views: views)
@@ -348,12 +348,12 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     override public func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         
-        currentTableView?.panGestureRecognizer.removeTarget(self, action: "didPanTableView:")
+        currentTableView?.panGestureRecognizer.removeTarget(self, action: #selector(LLSwipeCell.didPanTableView(_:)))
         
         currentTableView = newSuperview?.parentViewOfClass(UITableView.self)
         currentTableView?.directionalLockEnabled = true
         
-        currentTableView?.panGestureRecognizer.addTarget(self, action: "didPanTableView:")
+        currentTableView?.panGestureRecognizer.addTarget(self, action: #selector(LLSwipeCell.didPanTableView(_:)))
     }
     
     @objc private func didPanTableView(rec: UIPanGestureRecognizer) {
