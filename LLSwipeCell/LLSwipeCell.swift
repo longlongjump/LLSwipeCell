@@ -204,7 +204,10 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
     var leftTriggerOffset = 50
     
     private let rightButtonsContainerView = SlideButtonsGroupView(side: .Right)
+    private var rightContainerTrailingConstraint: NSLayoutConstraint!
+    
     private let leftButtonsContainerView = SlideButtonsGroupView(side: .Left)
+    private var leftContainerTrailingConstraint: NSLayoutConstraint!
     
     public var canOpenLeftButtons = true
     public var canOpenRightButtons = true
@@ -246,10 +249,26 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         cellScrollView.addConstraint(widthConstraint)
         
         
+        let rightPlaceholderView = UIView()
+        rightPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
+        cellScrollView.addSubview(rightPlaceholderView)
+        rightPlaceholderView.backgroundColor = .clearColor()
+        cellScrollView.addConstraint(NSLayoutConstraint(item: rightPlaceholderView, attribute: .Width, relatedBy: .Equal, toItem: rightButtonsContainerView, attribute: .Width, multiplier: 1, constant: 0))
+        
+        
+        let leftPlaceholderView = UIView()
+        leftPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
+        leftPlaceholderView.backgroundColor = .clearColor()
+        cellScrollView.addSubview(leftPlaceholderView)
+        cellScrollView.addConstraint(NSLayoutConstraint(item: leftPlaceholderView, attribute: .Width, relatedBy: .Equal, toItem: leftButtonsContainerView, attribute: .Width, multiplier: 1, constant: 0))
+        
+        
         let buttonViews = ["slideContentView": slideContentView,
-        "rightButtonsContainerView": rightButtonsContainerView,
-        "leftButtonsContainerView": leftButtonsContainerView]
-        let hotizontalCons = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[leftButtonsContainerView]-0-[slideContentView]-0-[rightButtonsContainerView]-0-|", options: [], metrics: nil, views: buttonViews)
+                           "rightPlaceholderView": rightPlaceholderView,
+                           "leftPlaceholderView": leftPlaceholderView]
+        
+        
+        let hotizontalCons = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[leftPlaceholderView]-0-[slideContentView]-0-[rightPlaceholderView]-0-|", options: [], metrics: nil, views: buttonViews)
         cellScrollView.addConstraints(hotizontalCons)
     }
     
@@ -279,7 +298,12 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         ]
         
         let vertCons = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[leftButtonsContainerView]-0-|", options: [], metrics: nil, views: views)
+        
         cellScrollView.addConstraints(vertCons)
+        
+        leftContainerTrailingConstraint = NSLayoutConstraint(item: leftButtonsContainerView, attribute: .Leading, relatedBy: .Equal, toItem: cellScrollView, attribute: .Leading, multiplier: 1, constant: 0)
+        
+        cellScrollView.addConstraint(leftContainerTrailingConstraint)
     }
     
     private func setupRightGroupView() {
@@ -293,6 +317,10 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
         
         let vertCons = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[rightButtonsContainerView]-0-|", options: [], metrics: nil, views: views)
         cellScrollView.addConstraints(vertCons)
+        
+        rightContainerTrailingConstraint = NSLayoutConstraint(item: rightButtonsContainerView, attribute: .Trailing, relatedBy: .Equal, toItem: cellScrollView, attribute: .Trailing, multiplier: 1, constant: 0)
+        
+        cellScrollView.addConstraint(rightContainerTrailingConstraint)
     }
     
     private func setupUIIfNeeded() {
@@ -423,8 +451,16 @@ public class LLSwipeCell: UITableViewCell, UIScrollViewDelegate {
             && !showsRightButtons || rightButtons.isEmpty)
     }
     
+    private func upateConstraints() {
+        leftContainerTrailingConstraint.constant = min(cellScrollView.contentOffset.x, 0)
+        let leftOffset = cellScrollView.contentOffset.x - (leftButtonsContainerView.bounds.size.width + rightButtonsContainerView.bounds.size.width)
+        
+        rightContainerTrailingConstraint.constant = max(0, leftOffset)
+    }
+    
     public func scrollViewDidScroll(scrollView: UIScrollView) {
         updateGroupViewProgres()
+        upateConstraints()
         
         if (cellScrollView.dragging && (shouldHideLeftButtons || shouldHideRightButtons)) {
             hideSwipeOptions(false)
