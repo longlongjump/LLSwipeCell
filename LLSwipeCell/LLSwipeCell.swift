@@ -35,7 +35,7 @@ internal class OverlayView: UIView {
         targetView?.touchesEnded(touches, withEvent: event)
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    override func touchesCancelled(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesCancelled(touches, withEvent: event)
         targetView?.touchesCancelled(touches, withEvent: event)
     }

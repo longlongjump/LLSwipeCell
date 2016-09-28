@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "LLSwipeCell"
   s.summary      = "LLSwipeCell"
-  s.version      = "0.5"
+  s.version      = "0.6"
   s.homepage     = "https://github.com/longlongjump/LLSwipeCell"
   s.license      = "MIT"
   s.author       = { "Eugene Ovchynnykov" => "eugene.ovchynnykov@gmail.com" }
